@@ -88,6 +88,65 @@ body {
 
 /*search section*/
 
+.search-section {
+    padding: 20px;
+    display: flex;
+    align-content: center;
+    background-color: var(--bg_body);
+    border-radius: 10px;
+}
+
+.search-bar {
+    flex: 1;
+    background-color: var(--bg_default);
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-width: 0;
+    border-right-width: 1px;
+    border-style: solid;
+    border-right-color: var(--lines-color);
+}
+
+.search-bar input {
+    border: 0;
+    padding: 10px;
+    font-size: 16px;
+    outline: none;
+}
+
+.search-bar ion-icon {
+    padding-left: 5px;
+    font-size: 24px;
+    color: var(--body-text);
+}
+
+.select-container {
+    display: flex;
+    flex-direction:column;
+    background-color: var(--bg_default);
+    border-radius: 5px, 5px, 5px, 0;
+    border-width: 0;
+    border-right-width: 1px;
+    border-style: solid;
+    border-right-color: var(--lines-color);
+}
+
+.search-section label {
+    font-size: 14px;
+    margin: 5px;
+    color: var(--body-text);
+}
+
+.search-section select {
+    border: none;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    outline: none;
+    background-color: var(--bg_default);
+}
 /*Color Palette Definitions Dark*/
 body.dark-mode {
     --brand-primary: #0768AC;
