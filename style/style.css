@@ -1,0 +1,101 @@
+/*Color Palette Definitions */
+:root {
+    --brand-primary: #0768AC;
+    --brand-secondary: #03C180;
+    --bg_default: #FFFFFF;
+    --bg_body: #F0F9FF;
+    --lines-color: #DDDDDD;
+    --body-text: #333333;
+    --heart-color: #DC143C;
+}
+
+/*General style*/
+* {
+    font-family: "Nunito Sans", system-ui;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+body {
+    background-color:var(--bg_body);
+    color: var(--body-text);
+}
+
+/*Top Bar Stayle*/
+
+.top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--bg_default);
+    border: 1px solid var(--lines-color);
+    padding:10px 20px;
+}
+
+.title {
+    color: var(--brand-primary);
+    font-size: 1.2rem;
+    font-weight: 1000;
+}
+
+.action {
+    background: none;
+    gap: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.icon-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 15px;
+    background-color: var(--bg_default);
+    color: var(--body-text);
+    border: 2px solid var(--lines-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.icon-btn ion-icon {
+    font-size: 1.5rem;
+}
+
+.icon-btn:hover {
+    border-color: var(--brand-primary);
+    color: var(--brand-primary);
+}
+
+/*welcome*/
+.welcome-section {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: var(--bg_default);
+}
+
+.welcome-message h1 {
+    font-size: 2.5rem;
+    color: var(--brand-secondary);
+}
+
+.welcome-message p {
+    font-size: 1.2rem;
+}
+
+/*Color Palette Definitions Dark*/
+body.dark-mode {
+    --brand-primary: #0768AC;
+    --brand-secondary: #03C180;
+    --bg_default: #1A1A1A;
+    --bg_body: #282828;
+    --lines-color: #000000;
+    --body-text: #EDEDED;
+    --heart-color: #DC143C;
+}
+
+/*Dark*/
+
