@@ -182,6 +182,9 @@ body {
 /*cards*/
 
 main {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 20px; 
     max-width: var(--max-width);
     padding: 40px;
 }
@@ -348,5 +351,9 @@ body.dark-mode .card{
 
     .select-container {
         width: 50%;
+    }
+    main {
+        grid-template-columns: 1fr;
+        justify-content: center;
     }
 }
