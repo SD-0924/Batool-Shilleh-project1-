@@ -7,6 +7,7 @@
     --lines-color: #DDDDDD;
     --body-text: #333333;
     --heart-color: #DC143C;
+    --max-width: 4440px;
 }
 
 /*General style*/
@@ -32,7 +33,7 @@ body {
     padding:10px 20px;
 }
 
-.title {
+.title-top {
     color: var(--brand-primary);
     font-size: 1.2rem;
     font-weight: 1000;
@@ -65,6 +66,29 @@ body {
 .icon-btn:hover {
     border-color: var(--brand-primary);
     color: var(--brand-primary);
+}
+
+/*reiangle*/
+
+.shape {
+    position: relative; 
+}
+
+.triangle-green {
+    position: absolute;
+    width: 100vw;
+    height: 75px;
+    background-color: var(--brand-secondary);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 10% 0%);
+    z-index: 3;
+}
+
+.triangle-blue {
+    position: absolute;
+    width: 100vw;
+    height: 75px;
+    background: linear-gradient(to right, var(--brand-primary), var(--brand-secondary));
+    clip-path: polygon(0 0, 90% 0, 0 85%, 0% 100%);
 }
 
 /*welcome*/
@@ -101,7 +125,7 @@ body {
 
 .search-main {
     display: grid;
-    grid-template-columns: 1fr auto auto;
+    grid-template-columns: 1fr auto  auto;
     border-radius: 10px;
     overflow: hidden; 
 }
@@ -157,6 +181,10 @@ body {
 
 /*cards*/
 
+main {
+    max-width: var(--max-width);
+    padding: 40px;
+}
 .card {
     flex-direction: column;
     height: 300px;
@@ -260,4 +288,65 @@ body.dark-mode select{
 
 body.dark-mode .card{
     background-color: var(--bg_default);
+}
+
+
+/*respon*/
+@media (max-width: 768px) {
+    .top-bar {
+        justify-content: space-between; 
+        padding: 10px 20px; 
+    }
+
+    .title-top {
+        font-size: 1rem; 
+    }
+
+    .action {
+        gap: 10px; 
+    }
+
+    .icon-btn {
+        padding: 6px;
+        font-size: 1.5rem; 
+    }
+
+    .icon-btn span {
+        display: none; 
+    }
+
+    .welcome-message h1 {
+        font-size: 1.5rem;
+        padding: 5px;
+    }
+
+    .welcome-message p {
+        font-size: 0.9rem; 
+        padding: 5px;
+    }
+
+   
+    .search-section {
+        display: flex;
+        flex-direction: column; 
+        padding: 20px;
+        align-items: flex-start; 
+        background-color: var(--bg_body);
+        border-radius: 10px; 
+    }
+
+    .search-main {
+        display: flex;
+        flex-direction: column; 
+        width: 100%; 
+    }
+
+    .search-bar {
+        width: 100%; 
+        border-right: none;
+    }
+
+    .select-container {
+        width: 50%;
+    }
 }

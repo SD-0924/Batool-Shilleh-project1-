@@ -1,0 +1,377 @@
+/*Color Palette Definitions */
+:root {
+  --brand-primary: #0768ac;
+  --brand-secondary: #03c180;
+  --bg_default: #ffffff;
+  --bg_body: #f0f9ff;
+  --lines-color: #dddddd;
+  --body-text: #333333;
+  --heart-color: #dc143c;
+  --max-width: 1440px;
+}
+
+/*General style*/
+* {
+  font-family: "Nunito Sans", system-ui;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg_body);
+  color: var(--body-text);
+}
+
+/*Top Bar Stayle*/
+
+.top-bar {
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--bg_default);
+  border: 1px solid var(--lines-color);
+  padding: 10px 20px;
+}
+
+.title-top {
+  color: var(--brand-primary);
+  font-size: 1.2rem;
+  font-weight: 1000;
+}
+
+.action {
+  background: none;
+  gap: 10px;
+  align-items: center;
+}
+
+.icon-btn {
+  align-items: center;
+  gap: 8px;
+  padding: 8px 15px;
+  background-color: var(--bg_default);
+  color: var(--body-text);
+  border: 2px solid var(--lines-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.icon-btn ion-icon {
+  font-size: 1.5rem;
+}
+
+.icon-btn:hover {
+  border-color: var(--brand-primary);
+  color: var(--brand-primary);
+}
+
+/*reiangle*/
+.shape {
+  position: relative; 
+}
+
+.triangle-green {
+  position: absolute;
+  width: 100vw;
+  height: 75px;
+  background-color: var(--brand-secondary);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 10% 0%);
+  z-index: 3;
+}
+
+.triangle-blue {
+  position: absolute;
+  width: 100vw;
+  height: 75px;
+  background: linear-gradient(to right, var(--brand-primary), var(--brand-secondary));
+  clip-path: polygon(0 0, 90% 0, 0 85%, 0% 100%);
+}
+
+/*welcome*/
+.welcome-section {
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  padding: 50px 20px;
+  background-color: var(--bg_default);
+}
+
+.welcome-message {
+  flex-direction: column;
+}
+.welcome-message h1 {
+  font-size: 1.8rem;
+  color: var(--brand-secondary);
+}
+
+.welcome-message p {
+  font-size: 1.2rem;
+}
+
+/* Main Card Styling */
+.main-card {
+  display: grid;
+  grid-template-columns: auto;
+  justify-content: center;
+  align-content: center;
+  background-color: #1a1a1a;
+  padding: 20px;
+  gap: 20px;
+}
+
+.card-content {
+  max-width: var(--max-width);
+}
+
+.card-content, .card-info {
+  flex: 1; 
+  max-width: 45%;
+}
+.category {
+  color: var(--brand-secondary);
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.title {
+  color: var(--bg_default);
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.rating {
+  color: #ffc107;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.description {
+  color: var(--bg_default);
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.card-info {
+  max-width: var(--max-width);
+  position: absolute;
+  height: 400px;
+  width: 300px;
+  background-color: #ffff;
+  flex-direction: column;
+  padding: 5px;
+  top: 220px;
+  right: 300px;
+}
+
+.card-image {
+  position: relative;
+  height: 200px;
+}
+
+.card-image img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.author {
+  color: #000000;
+  padding: 30px 5px;
+}
+
+.author a {
+  color: var(--brand-secondary);
+}
+
+.button-fav {
+  border: 1px solid var(--lines-color);
+  flex-direction: column;
+  padding: 30px;
+}
+
+.button-fav p {
+  color: black;
+}
+
+.add-to-favorites {
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  border: none;
+  background-color: #03c180;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-to-favorites ion-icon {
+  padding-left: 5px;
+  font-size: 24px;
+  color:white;
+}
+
+.add-to-favorites:hover {
+  background-color: #028a64;
+}
+
+/*item*/
+.topics{
+  justify-content: center;
+  padding-top: 30px;
+}
+.container {
+  background-color: var(--bg_default);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  min-width: 500px;
+  border: 1px solid var(--lines-color);
+}
+
+.container h1 {
+  color: var(--body-text);
+  padding: 20px;
+  border-bottom: 1px solid var(--lines-color);
+}
+
+.topic-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.topic-list li {
+  display: flex;
+  position: relative;
+  padding-left: 25px;
+  padding-top: 12px;
+  padding-bottom: 20px;
+  color: var(--body-text);
+  border-bottom: 1px solid var(--lines-color);
+}
+
+.topic-list li ion-icon {
+  color: var(--brand-secondary);
+  padding-right: 5px;
+  font-weight: bold;
+}
+
+/*footer*/
+footer p {
+  display: flex;
+  margin-top: 10px;
+  align-items: center;
+  justify-content: center;
+}
+/*utelty clas*/
+.flex {
+  display: flex;
+}
+/*Color Palette Definitions Dark*/
+body.dark-mode {
+  --brand-primary: #0768ac;
+  --brand-secondary: #03c180;
+  --bg_default: #1a1a1a;
+  --bg_body: #282828;
+  --lines-color: #000000;
+  --body-text: #ededed;
+  --heart-color: #dc143c;
+}
+
+/*Dark*/
+body.dark-mode .title {
+  color: var(--body-text);
+}
+
+body.dark-mode .description {
+  color: var(--body-text);
+}
+
+/*respon*/
+
+/*info*/
+@media (max-width: 768px) {
+  .main-card {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    padding: 20px;
+    text-align: center; 
+  }
+
+  .card-content {
+    max-width: 100%; 
+    padding: 10px;
+  }
+
+  .card-info {
+    position: relative; 
+    max-width: 90%; 
+    margin: 20px auto;
+    height: auto; 
+    width: auto; 
+  }
+
+  .card-image {
+    height: 200px; 
+    overflow: hidden; 
+  }
+
+  .card-image img {
+    width: 100%; 
+    height: auto;
+    object-fit: cover; 
+  }
+
+  .title {
+    font-size: 1.5rem; 
+  }
+
+  .description {
+    font-size: 0.9rem; 
+  }
+
+  .author,
+  .button-fav {
+    text-align: center; 
+  }
+
+  .add-to-favorites {
+    padding: 8px 15px; 
+    font-size: 0.9rem; 
+  }
+
+  .top-bar {
+    justify-content: space-between; 
+    padding: 10px 20px;
+  }
+
+  .title-top {
+    font-size: 1rem; 
+  }
+
+  .action {
+    gap: 10px; 
+  }
+
+  .icon-btn {
+    padding: 6px;
+    font-size: 1.5rem;
+  }
+
+  .icon-btn span {
+    display: none; 
+  }
+
+  .welcome-message h1 {
+    font-size: 1.5rem; 
+    padding: 5px;
+  }
+
+  .welcome-message p {
+    font-size: 1rem;
+    padding: 5px; 
+  }
+}
