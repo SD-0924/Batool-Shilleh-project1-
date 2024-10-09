@@ -182,12 +182,15 @@ body {
 /*cards*/
 
 main {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); 
-    gap: 20px; 
     max-width: var(--max-width);
     padding: 40px;
 }
+#card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px,2fr));
+    gap: 20px;  
+  }
+  
 .card {
     flex-direction: column;
     height: 300px;
@@ -197,26 +200,27 @@ main {
     width: 300px;
     overflow: hidden;
     transition: transform 0.3s;
-}
-
-.card:hover {
+  }
+  
+  .card:hover {
     transform: scale(1.05);
-}
-
-.card-header {
+  }
+  
+  .card-header {
     position: relative;
-    height: 150px; 
-    overflow: hidden; 
-}
-
-.logo {
-    position: absolute; 
+    height: 250px;
+    overflow: hidden;
+  }
+  
+  .logo {
+    position: absolute;
     top: 0;
     left: 0;
-    width: 100%; 
-    height: 100%; 
-    object-fit: cover; 
-}
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
 
 .card-title {
     font-size: 24px;
@@ -239,12 +243,23 @@ main {
 }
 
 .star {
-
     font-size: 20px;
     color: lightgray; 
     transition: color 0.2s ease;
-    padding: 5px;
 }
+
+.star[data-value="1"] {
+    color: gold;  /* Color for filled star */
+}
+
+.star[data-value="0.5"] {
+    color: gold;  /* Color for half star */
+}
+
+.star[data-value="0"] {
+    color: lightgray;  /* Color for empty star */
+}
+
 
 .star:hover,
 .star:hover ~ .star {
@@ -356,4 +371,10 @@ body.dark-mode .card{
         grid-template-columns: 1fr;
         justify-content: center;
     }
+    #card-container {
+        
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+
+
 }
