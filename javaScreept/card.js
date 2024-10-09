@@ -1,12 +1,13 @@
 const cardContainer = document.getElementById('card-container');
 
-function createCard(card) {
-  console.log(card.title)
+function createCard(card) { // Added count parameter
+  console.log(card.title);
   const filledStars = Math.floor(card.rating);
   const halfStar = card.rating % 1 >= 0.5 ? 1 : 0;
 
   const cardHTML = `
-    <div class="card flex" onclick="showCardDetails(${JSON.stringify(card)})">
+  
+    <div class="card flex" onclick="showCardDetails(${card.id})">
       <div class="card-header">
         <img src="${card.image}" alt="${card.framework} Logo" class="logo" />
       </div>
@@ -27,48 +28,57 @@ function createCard(card) {
   return cardHTML;
 }
 
-async function renderCards() {
-  cardContainer.innerHTML = ''; // Clear the container before rendering
+function showCardDetails(cardId) {
+  window.location.href = `about.html?id=${cardId}`; // Redirect to About page with the card ID
+}
 
+async function fetchCards() {
   try {
-      const response = await fetch('http://localhost:5000/api/languages');
+      const response = await fetch('https://batool-shilleh-project1.onrender.com/api/languages');
       if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
       }
-
-      const cardData = await response.json(); // Parse the JSON response
-
-      if (Array.isArray(cardData) && cardData.length > 0) {
-          cardData.forEach((card) => {
-              if (card) { // Ensure the card is not null
-                  cardContainer.innerHTML += createCard(card);
-              }
-          });
-          cardData.forEach((card) => {
-            console.log(card); // Log the card to check if it’s null or valid
-            if (card) {
-                cardContainer.innerHTML += createCard(card);
-            } else {
-                console.error('Card is null or invalid:', card);
-            }
-        });
-        
-      } else {
-          console.warn('No cards found or cardData is not an array:', cardData);
-          cardContainer.innerHTML = '<p>No cards available.</p>';
-      }
+      return await response.json(); // Parse and return the JSON response
   } catch (error) {
       console.error('Error fetching card data:', error);
-      cardContainer.innerHTML = '<p>Failed to load cards. Please try again later.</p>';
+      return []; // Return an empty array on error
+  }
+}
+
+async function renderCards(cards) {
+  cardContainer.innerHTML = ''; // Clear the container before rendering
+
+  // Select the paragraph element for displaying the count
+  const searchCountElement = document.querySelector('#search-count p');
+
+  if (Array.isArray(cards) && cards.length > 0) {
+      // Display the number of topics found
+      const count = cards.length; // Get the count of filtered/sorted cards
+      
+      // Update the paragraph with the count
+      searchCountElement.textContent = `${count} Topic Found`;
+      
+      cards.forEach((card) => {
+          if (card) { // Ensure the card is not null
+              cardContainer.innerHTML += createCard(card, count); // Pass the count to createCard
+          }
+      });
+  } else {
+      console.warn('No cards found or cardData is not an array:', cards);
+      searchCountElement.textContent = '0 Topic Found'; // Update to show no topics found
+      cardContainer.innerHTML = '<p>No cards available.</p>';
   }
 }
 
 
 // Call the renderCards function when the page loads
-window.onload = renderCards;
+window.onload = async () => {
+  const cardData = await fetchCards(); // Fetch cards once
+  await renderCards(cardData); // Render the fetched cards
+};
 
 // Sorting and filtering logic
-const sortSelect = document.getElementById('soer');
+const sortSelect = document.getElementById('sort');
 const filterSelect = document.getElementById('filter');
 const searchInput = document.getElementById('searchInput');
 
@@ -98,24 +108,14 @@ function sortCards(cards) {
 }
 
 // Function to handle both sorting and filtering
-function handleSortingAndFiltering() {
-  // Fetch cards again to apply sorting and filtering
-  fetch('http://localhost:5000/api/languages')
-    .then(response => response.json())
-    .then(cardData => {
-      let filteredCards = filterCards(cardData); // Filter first
-      let sortedAndFilteredCards = sortCards(filteredCards); // Then sort
-      renderCards(sortedAndFilteredCards); // Finally, render
-    })
-    .catch(error => {
-      console.error('Error fetching card data:', error);
-    });
+async function handleSortingAndFiltering() {
+  const cardData = await fetchCards(); // Fetch cards
+  let filteredCards = filterCards(cardData); // Filter first
+  let sortedAndFilteredCards = sortCards(filteredCards); // Then sort
+  await renderCards(sortedAndFilteredCards); // Finally, render
 }
 
 // Event listeners for sorting and filtering
 sortSelect.addEventListener('change', handleSortingAndFiltering);
 filterSelect.addEventListener('change', handleSortingAndFiltering);
 searchInput.addEventListener('input', handleSortingAndFiltering);
-
-// Initial render
-window.onload = handleSortingAndFiltering;

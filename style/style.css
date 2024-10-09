@@ -181,6 +181,11 @@ body {
 
 /*cards*/
 
+#search-count {
+    font-size: x-large;
+    font-weight: bold;
+    padding-left: 50px;
+}
 main {
     max-width: var(--max-width);
     padding: 40px;
