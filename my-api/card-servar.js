@@ -1,10 +1,9 @@
 const express = require('express');
-const cors = require('cors'); // Import the CORS module
 const cardData = require('./courseData');
 const app = express();
-const PORT = 4000;
+const PORT = 5000;
 
-// Enable CORS for all routes
+const cors = require('cors');
 app.use(cors());
 
 app.get('/api/languages/:id', (req, res) => {
