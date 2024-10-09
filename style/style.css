@@ -276,7 +276,16 @@ main {
     font-size: 14px;
     color: #555;
 }
-
+/*footer*/
+footer p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  /*utelty clas*/
+  .flex {
+    display: flex;
+  }
 
 /*utelty clas*/
 .flex{
