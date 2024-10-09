@@ -38,12 +38,13 @@ async function fetchCards() {
     try {
         const response = await fetch('http://localhost:4000/api/languages'); // تأكد من أن هذا هو مسار الـ API الصحيح
         if (!response.ok) {
-            throw new Error('Network response was not ok');
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
         renderCards(data); // Render cards after fetching
     } catch (error) {
-        console.error('There has been a problem with your fetch operation:', error);
+        console.error('There has been a problem with your fetch operation:', error.message);
+        alert('فشل في تحميل البيانات، يرجى التحقق من الاتصال بالإنترنت أو رابط الـ API.');
     }
 }
 
@@ -88,13 +89,14 @@ function sortCards(cards) {
 }
 
 // Function to handle both sorting and filtering
-function handleSortingAndFiltering(cards) {
+function handleSortingAndFiltering() {
+    const cards = Array.from(cardContainer.children).map(card => JSON.parse(card.dataset.card)); // Get current cards from the DOM
     let filteredCards = filterCards(cards); // Filter first
     let sortedAndFilteredCards = sortCards(filteredCards); // Then sort
     renderCards(sortedAndFilteredCards); // Finally, render
 }
 
 // Event listeners for sorting and filtering
-sortSelect.addEventListener('change', () => handleSortingAndFiltering(cardData));
-filterSelect.addEventListener('change', () => handleSortingAndFiltering(cardData));
-searchInput.addEventListener('input', () => handleSortingAndFiltering(cardData));
+sortSelect.addEventListener('change', handleSortingAndFiltering);
+filterSelect.addEventListener('change', handleSortingAndFiltering);
+searchInput.addEventListener('input', handleSortingAndFiltering);
