@@ -3,7 +3,7 @@ async function getCourseData() {
     const cardId = urlParams.get('id'); // Get the card ID from the URL
 
     try {
-        const response = await fetch(`http://localhost:5000/api/languages/${cardId}`); // Fetch course by ID
+        const response = await fetch(`https://batool-shilleh-project1.onrender.com/api/languages/${cardId}`); // Fetch course by ID
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
