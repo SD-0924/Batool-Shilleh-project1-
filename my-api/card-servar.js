@@ -30,7 +30,7 @@ app.post('/api/favorites', (req, res) => {
     const favorite = req.body;
 
     // التحقق من صحة البيانات المدخلة
-    if (favorite || favorite.image || favorite.framework ) {
+    if (favorite && favorite.image && favorite.framework ) {
         return res.status(400).send('valid favorite data');
     }
 
