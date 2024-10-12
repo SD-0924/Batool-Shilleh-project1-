@@ -6,7 +6,7 @@ const app = express();
 const PORT = 2000;
 
 app.use(cors());
-app.use(express.json()); // للتأكد من أن السيرفر يفهم JSON
+app.use(express.json()); 
 
 // GET a language by ID
 app.get('/api/languages/:id', (req, res) => {
@@ -29,7 +29,6 @@ app.get('/api/languages', (req, res) => {
 app.post('/api/favorites', (req, res) => {
     const favorite = req.body;
 
-    // قراءة بيانات المفضلة الحالية من الملف
     fs.readFile('favorites.js', 'utf8', (err, data) => {
         if (err) {
             console.error(err);
@@ -41,10 +40,8 @@ app.post('/api/favorites', (req, res) => {
             favorites = JSON.parse(data);
         }
 
-        // إضافة المفضلة الجديدة
         favorites.push(favorite);
 
-        // كتابة بيانات المفضلة المحدثة في الملف
         fs.writeFile('favorites.js', JSON.stringify(favorites, null, 2), (err) => {
             if (err) {
                 console.error(err);
