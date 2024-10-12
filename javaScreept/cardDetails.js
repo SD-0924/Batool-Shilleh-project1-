@@ -18,7 +18,7 @@ async function getCourseData() {
 
 function renderCourseDetails(course) {
     const mainCard = document.getElementById('main-card');
-    const topicsCard = document.getElementById('topics-card'); // Removed extra space
+    const topicsCard = document.getElementById('topics-card');
 
     mainCard.innerHTML = `
         <div class="card-content">
@@ -31,10 +31,10 @@ function renderCourseDetails(course) {
             <div class="card-image">
                 <img src="${course.image}" alt="${course.title} Logo" />
             </div>
-            <p class="author">${course.framework} by <a>${course.author}<a></p>
+            <p class="author">${course.framework} by <a>${course.author}</a></p>
             <div class="button-fav flex">
                 <p>Interested in this topic?</p>
-                <button class="add-to-favorites flex">
+                <button class="add-to-favorites flex" onclick="addToFavorites('${course.id}', '${course.framework}', '${course.image}', ${course.rating})">
                     Add to Favourites
                     <ion-icon name="heart-outline"></ion-icon>
                 </button>
@@ -42,7 +42,6 @@ function renderCourseDetails(course) {
         </div>
     `;
 
-    // Check if topics exist and render them
     if (course.topics && Array.isArray(course.topics) && course.topics.length > 0) {
         topicsCard.innerHTML = `
             <div class="container">
@@ -57,5 +56,27 @@ function renderCourseDetails(course) {
     }
 }
 
+async function addToFavorites(id, framework, image, rating) {
+    const favorite = { id, framework, image, rating };
+
+    try {
+        const response = await fetch('http://localhost:2000/api/favorites', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(favorite),
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to add favorite');
+        }
+
+        const result = await response.json();
+        console.log('Favorite added:', result);
+    } catch (error) {
+        console.error('Error adding favorite:', error);
+    }
+}
 // Call the function when the page loads
 window.onload = getCourseData;

@@ -1,14 +1,12 @@
 const express = require('express');
-const fs = require('fs'); // To work with the file system
-const path = require('path'); // To handle file paths
-const cardData = require('./courseData');
-const favoritesData = require('./favlist');
-const app = express();
-const PORT = 5000;
-
+const fs = require('fs');
 const cors = require('cors');
+const cardData = require('./courseData');
+const app = express();
+const PORT = 2000;
+
 app.use(cors());
-app.use(express.json()); // To parse JSON request bodies
+app.use(express.json()); // للتأكد من أن السيرفر يفهم JSON
 
 // GET a language by ID
 app.get('/api/languages/:id', (req, res) => {
@@ -27,34 +25,35 @@ app.get('/api/languages', (req, res) => {
     res.json(cardData);
 });
 
-// POST a language as favorite
-app.post('/api/favorites/:id', (req, res) => {
-    const id = parseInt(req.params.id);
-    const language = cardData.find(item => item.id === id);
+// POST to store a favorite
+app.post('/api/favorites', (req, res) => {
+    const favorite = req.body;
 
-    if (language) {
-        const favorite = {
-            framework: language.framework,
-            image: language.image,
-            rating: language.rating
-        };
+    // قراءة بيانات المفضلة الحالية من الملف
+    fs.readFile('favorites.js', 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).send('Server Error');
+        }
 
-        favoritesData.push(favorite);
-        // Write the updated favorites data to a file
-        fs.writeFile(path.join(__dirname, 'favoritesData.js'), `module.exports = ${JSON.stringify(favoritesData, null, 2)};`, (err) => {
+        let favorites = [];
+        if (data) {
+            favorites = JSON.parse(data);
+        }
+
+        // إضافة المفضلة الجديدة
+        favorites.push(favorite);
+
+        // كتابة بيانات المفضلة المحدثة في الملف
+        fs.writeFile('favorites.js', JSON.stringify(favorites, null, 2), (err) => {
             if (err) {
-                return res.status(500).json({ message: 'Error saving favorite language' });
+                console.error(err);
+                return res.status(500).send('Failed to save favorite');
             }
+
             res.status(201).json(favorite);
         });
-    } else {
-        res.status(404).json({ message: 'Language not found' });
-    }
-});
-
-// GET all favorite languages
-app.get('/api/favorites', (req, res) => {
-    res.json(favoritesData);
+    });
 });
 
 // Start the server
