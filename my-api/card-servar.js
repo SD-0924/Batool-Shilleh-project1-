@@ -29,8 +29,6 @@ app.get('/api/languages', (req, res) => {
 app.post('/api/favorites', (req, res) => {
     const favorite = req.body;
 
-
-    // قراءة الملف الموجود
     fs.readFile('my-api/favorites.js', 'utf8', (err, data) => {
         if (err) {
             console.error(err);
@@ -39,28 +37,21 @@ app.post('/api/favorites', (req, res) => {
 
         let favorites = [];
         if (data) {
-            try {
-                favorites = JSON.parse(data); // تحويل النص إلى كائن JSON
-            } catch (error) {
-                console.error('Error parsing JSON:', error);
-                return res.status(500).send('Failed to parse favorites');
-            }
+            favorites = JSON.parse(data);
         }
 
-        favorites.push(favorite); // إضافة المفضلة الجديدة إلى القائمة
+        favorites.push(favorite);
 
-        // كتابة المفضلات إلى الملف
-        fs.writeFile('my-api/favorites.js', JSON.stringify(favorites, null, 2), (err) => {
+        fs.writeFile('favorites.js', JSON.stringify(favorites, null, 2), (err) => {
             if (err) {
                 console.error(err);
                 return res.status(500).send('Failed to save favorite');
             }
 
-            res.status(201).json(favorite); // إعادة المفضلة المحفوظة
+            res.status(201).json(favorite);
         });
     });
 });
-
 
 // Start the server
 app.listen(PORT, () => {
