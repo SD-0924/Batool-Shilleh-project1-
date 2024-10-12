@@ -1,6 +1,6 @@
 const cardContainer = document.getElementById('card-container');
 
-function createCard(card) { // Added count parameter
+function createCard(card) { 
   console.log(card.title);
   const filledStars = Math.floor(card.rating);
   const halfStar = card.rating % 1 >= 0.5 ? 1 : 0;
@@ -29,7 +29,7 @@ function createCard(card) { // Added count parameter
 }
 
 function showCardDetails(cardId) {
-  window.location.href = `about.html?id=${cardId}`; // Redirect to About page with the card ID
+  window.location.href = `about.html?id=${cardId}`; 
 }
 
 async function fetchCards() {
@@ -38,54 +38,46 @@ async function fetchCards() {
       if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
       }
-      return await response.json(); // Parse and return the JSON response
+      return await response.json(); 
   } catch (error) {
       console.error('Error fetching card data:', error);
-      return []; // Return an empty array on error
+      return []; 
   }
 }
 
 async function renderCards(cards) {
-  cardContainer.innerHTML = ''; // Clear the container before rendering
+  cardContainer.innerHTML = ''; 
 
-  // Select the paragraph element for displaying the count
   const searchCountElement = document.querySelector('#search-count p');
 
   if (Array.isArray(cards) && cards.length > 0) {
-      // Display the number of topics found
-      const count = cards.length; // Get the count of filtered/sorted cards
+      const count = cards.length; 
       
-      // Update the paragraph with the count
       searchCountElement.textContent = `${count} Topic Found`;
       
-      // Loop through each card and check if it's valid
       cards.forEach((card) => {
-          if (card) { // Ensure the card is not null or undefined
-              cardContainer.innerHTML += createCard(card, count); // Pass the count to createCard
+          if (card) { 
+              cardContainer.innerHTML += createCard(card, count);
           } else {
               console.warn('Found null or undefined card:', card);
           }
       });
   } else {
       console.warn('No cards found or cardData is not an array:', cards);
-      searchCountElement.textContent = '0 Topic Found'; // Update to show no topics found
+      searchCountElement.textContent = '0 Topic Found'; 
       cardContainer.innerHTML = '<p>No cards available.</p>';
   }
 }
 
-// Call the renderCards function when the page loads
 window.onload = async () => {
-  const cardData = await fetchCards(); // Fetch cards
-  await renderCards(cardData); // Render the fetched cards
+  const cardData = await fetchCards(); 
+  await renderCards(cardData); 
 };
 
-
-// Sorting and filtering logic
 const sortSelect = document.getElementById('sort');
 const filterSelect = document.getElementById('filter');
 const searchInput = document.getElementById('searchInput');
 
-// Function to filter cards by search input or title
 function filterCards(cards) {
   const filterValue = searchInput.value.toLowerCase();
   if (filterValue) {
@@ -94,51 +86,46 @@ function filterCards(cards) {
       card.framework.toLowerCase().includes(filterValue)
     );
   }
-  return cards; // If no filter, return all cards
+  return cards; 
 }
 
-// Function to sort cards based on user selection
 function sortCards(cards) {
   const sortValue = sortSelect.value;
   if (sortValue === 'default') {
-    return cards.sort((a, b) => a.framework.localeCompare(b.framework)); // Alphabetical order
+    return cards.sort((a, b) => a.framework.localeCompare(b.framework)); 
   } else if (sortValue === 'relevance') {
-    return cards.sort((a, b) => b.rating - a.rating); // Rating from most to least
+    return cards.sort((a, b) => b.rating - a.rating); 
   } else if (sortValue === 'date') {
-    return cards.sort((a, b) => a.title.localeCompare(b.title)); // Sort by title alphabetically
+    return cards.sort((a, b) => a.title.localeCompare(b.title)); 
   }
   return cards;
 }
 
-// Function to handle both sorting and filtering
 async function handleSortingAndFiltering() {
-  const cardData = await fetchCards(); // Fetch cards
-  let filteredCards = filterCards(cardData); // Filter first
-  let sortedAndFilteredCards = sortCards(filteredCards); // Then sort
-  await renderCards(sortedAndFilteredCards); // Finally, render
+  const cardData = await fetchCards(); 
+  let filteredCards = filterCards(cardData); 
+  let sortedAndFilteredCards = sortCards(filteredCards); 
+  await renderCards(sortedAndFilteredCards); 
 }
 
-// Event listeners for sorting and filtering
 sortSelect.addEventListener('change', handleSortingAndFiltering);
 filterSelect.addEventListener('change', handleSortingAndFiltering);
 searchInput.addEventListener('input', handleSortingAndFiltering);
 
-// Function to add card to favorites
-const favorites = []; // Array to hold favorite cards
+const favorites = []; 
 
 function addToFavorites(cardId) {
-  // Find the card by ID
   const card = cardData.find(c => c.id === cardId);
   
-  if (card && !favorites.includes(card)) { // Check if the card exists and is not already in favorites
-      favorites.push(card); // Add to favorites
-      renderFavorites(); // Call function to render favorites
+  if (card && !favorites.includes(card)) { 
+      favorites.push(card); 
+      renderFavorites(); 
   }
 }
 
 function renderFavorites() {
   const favContainer = document.querySelector('.fav-cards-container');
-  favContainer.innerHTML = ''; // Clear previous favorites
+  favContainer.innerHTML = ''; 
 
   if (favorites.length > 0) {
       favorites.forEach(fav => {
@@ -152,6 +139,6 @@ function renderFavorites() {
           `;
       });
   } else {
-      favContainer.innerHTML = '<p>No favorites added.</p>'; // Show message if no favorites
+      favContainer.innerHTML = '<p>No favorites added.</p>';
   }
 }
