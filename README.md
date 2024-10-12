@@ -95,7 +95,8 @@ The project utilizes an API to fetch course data. Below are the API endpoints us
 | GET    | `/api/topics`              | Fetches a list of all available topics. | N/A                    | An array of topic objects.              |
 | GET    | `/api/topics/{id}`         | Fetches detailed information about a topic by its ID. | N/A                    | A single topic object with details.     |
 | POST   | `/api/favorites`           | Adds a topic to the user's favorites.    | `{ "id": "<topic_id>" }` | Confirmation message.                   |
-| DELETE | `/api/favorites/{id}`      | Removes a topic from the user's favorites.| N/A                    | Confirmation message.                   |
+
+You can also explore the API through the live demo available at [Render Demo](https://batool-shilleh-project1.onrender.com).
 
 ## Author
 
