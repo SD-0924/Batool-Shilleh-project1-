@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
@@ -9,83 +8,92 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
-      rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
+        rel="stylesheet"
     />
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <script
-      type="module"
-      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+        type="module"
+        src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
     ></script>
     <script
-      nomodule
-      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+        nomodule
+        src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
     ></script>
-  </head>
+</head>
 
-  <body>
+<body>
     <header class="top-bar flex">
-      <h2 class="title-top">Web Topics</h2>
-      <div class="action flex">
-        <button class="icon-btn flex" id="darkModeToggle">
-          <ion-icon name="moon-outline"></ion-icon>
-          <span>Dark Mode</span>
-        </button>
-        <button class="icon-btn flex">
-          <ion-icon name="heart-outline"></ion-icon>
-          <span>Favourites</span>
-        </button>
-      </div>
+        <h2 class="title-top">Web Topics</h2>
+        <div class="action flex">
+            <button class="icon-btn flex" id="darkModeToggle">
+                <ion-icon name="moon-outline"></ion-icon>
+                <span>Dark Mode</span>
+            </button>
+            <button class="icon-btn flex" id="favouritesToggle">
+                <ion-icon name="heart-outline"></ion-icon>
+                <span>Favourites</span>
+            </button>
+        </div>
     </header>
 
     <section class="shape">
-      <div class="triangle-green"></div>
-      <div class="triangle-blue"></div>
+        <div class="triangle-green"></div>
+        <div class="triangle-blue"></div>
     </section>
     <section class="welcome-section flex">
-      <div class="welcome-message flex">
-        <h1>Welcome to our website!</h1>
-        <p>We have a new design that's fresh, modern, and easy to use.</p>
-      </div>
+        <div class="welcome-message flex">
+            <h1>Welcome to our website!</h1>
+            <p>We have a new design that's fresh, modern, and easy to use.</p>
+        </div>
     </section>
 
     <section class="search-section">
-      <div class="search-main">
-        <div class="search-bar flex">
-          <ion-icon name="search-outline"></ion-icon>
-          <input type="text" id="searchInput"  placeholder="Search the website..." />
+        <div class="search-main">
+            <div class="search-bar flex">
+                <ion-icon name="search-outline"></ion-icon>
+                <input type="text" id="searchInput" placeholder="Search the website..." />
+            </div>
+            <div class="select flex">
+                <div class="select-container flex">
+                    <label for="sort">Sort By:</label>
+                    <select id="sort">
+                        <option value="default">Default</option>
+                        <option value="relevance">Rating</option>
+                        <option value="date">Title</option>
+                    </select>
+                </div>
+                <div class="select-container flex">
+                    <label for="filter">Filter by:</label>
+                    <select id="filter">
+                        <option value="default">Default</option>
+                        <option value="category1">Title</option>
+                    </select>
+                </div>
+            </div>
         </div>
-        <div class="select flex">
-        <div class="select-container flex">
-          <label for="sort">Sort By:</label>
-          <select id="sort">
-            <option value="default">Default</option>
-            <option value="relevance">Rating</option>
-            <option value="date">Title</option>
-          </select>
-        </div>
-        <div class="select-container flex">
-          <label for="filter">Filter by:</label>
-          <select id="filter">
-            <option value="default">Default</option>
-            <option value="category1">Title</option>
-          </select>
-        </div>
-      </div>
-      </div>
     </section>
     <div id="search-count">
-      <p>24 Topic Found</p>
+        <p>24 Topic Found</p>
     </div>
     <main>
-      <div id="card-container" class="flex"></div>
+        <div id="card-container" class="flex"></div>
     </main>
+    
     <footer>
-      <p>Developed with Batool Shilleh @2024</p>
+        <p>Developed with Batool Shilleh @2024</p>
     </footer>
-  </body>
+    
+    <section class="fav-container flex" id="favouritesSection" >
+        <h3 class="fav-title">My Favourite Topics</h3>
+        <div class="fav-cards-container">
+        </div>
+    </section>
 
-  <script src="javaScreept/darkmode.js"></script>
-  <script src="javaScreept/card.js"></script>
-
+    <script src="javaScreept/card.js"></script>
+    <script src="javaScreept/darkmode.js"></script>
+    <script src="javaScreept/fav.js">
+      
+    </script>
+</body>
 </html>

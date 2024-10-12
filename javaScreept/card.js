@@ -58,9 +58,12 @@ async function renderCards(cards) {
       // Update the paragraph with the count
       searchCountElement.textContent = `${count} Topic Found`;
       
+      // Loop through each card and check if it's valid
       cards.forEach((card) => {
-          if (card) { // Ensure the card is not null
+          if (card) { // Ensure the card is not null or undefined
               cardContainer.innerHTML += createCard(card, count); // Pass the count to createCard
+          } else {
+              console.warn('Found null or undefined card:', card);
           }
       });
   } else {
@@ -70,12 +73,12 @@ async function renderCards(cards) {
   }
 }
 
-
 // Call the renderCards function when the page loads
 window.onload = async () => {
-  const cardData = await fetchCards(); // Fetch cards once
+  const cardData = await fetchCards(); // Fetch cards
   await renderCards(cardData); // Render the fetched cards
 };
+
 
 // Sorting and filtering logic
 const sortSelect = document.getElementById('sort');
@@ -119,3 +122,36 @@ async function handleSortingAndFiltering() {
 sortSelect.addEventListener('change', handleSortingAndFiltering);
 filterSelect.addEventListener('change', handleSortingAndFiltering);
 searchInput.addEventListener('input', handleSortingAndFiltering);
+
+// Function to add card to favorites
+const favorites = []; // Array to hold favorite cards
+
+function addToFavorites(cardId) {
+  // Find the card by ID
+  const card = cardData.find(c => c.id === cardId);
+  
+  if (card && !favorites.includes(card)) { // Check if the card exists and is not already in favorites
+      favorites.push(card); // Add to favorites
+      renderFavorites(); // Call function to render favorites
+  }
+}
+
+function renderFavorites() {
+  const favContainer = document.querySelector('.fav-cards-container');
+  favContainer.innerHTML = ''; // Clear previous favorites
+
+  if (favorites.length > 0) {
+      favorites.forEach(fav => {
+          favContainer.innerHTML += `
+              <div class="fav-img-container">
+                  <img src="${fav.image}" alt="${fav.title}">
+              </div>
+              <div class="card-info-container-fav">
+                  <h3 class="language-name">${fav.title}</h3>
+              </div>
+          `;
+      });
+  } else {
+      favContainer.innerHTML = '<p>No favorites added.</p>'; // Show message if no favorites
+  }
+}
