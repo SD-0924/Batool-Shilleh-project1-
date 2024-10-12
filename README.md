@@ -11,6 +11,7 @@ Welcome to **Web Topics**, an interactive and modern website showcasing key web 
 - [Usage](#usage)
 - [Dark Mode](#dark-mode)
 - [Responsive Design](#responsive-design)
+- [API Documentation](#api-documentation)
 - [Author](#author)
 - [License](#license)
 
@@ -84,6 +85,17 @@ The layout is fully responsive, ensuring that content is displayed optimally on 
   }
 }
 ```
+
+## API Documentation
+
+The project utilizes an API to fetch course data. Below are the API endpoints used:
+
+| Method | Endpoint                   | Description                               | Request Body           | Response                                |
+|--------|----------------------------|-------------------------------------------|------------------------|-----------------------------------------|
+| GET    | `/api/topics`              | Fetches a list of all available topics. | N/A                    | An array of topic objects.              |
+| GET    | `/api/topics/{id}`         | Fetches detailed information about a topic by its ID. | N/A                    | A single topic object with details.     |
+| POST   | `/api/favorites`           | Adds a topic to the user's favorites.    | `{ "id": "<topic_id>" }` | Confirmation message.                   |
+| DELETE | `/api/favorites/{id}`      | Removes a topic from the user's favorites.| N/A                    | Confirmation message.                   |
 
 ## Author
 
