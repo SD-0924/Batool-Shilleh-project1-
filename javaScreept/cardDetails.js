@@ -59,7 +59,7 @@ async function addToFavorites(id, framework, image, rating) {
     const favorite = { id, framework, image, rating };
 
     try {
-        const response = await fetch('https://batool-shilleh-project1.onrender.com/api/favorites', {
+        const response = await fetch(' http://localhost:2000/api/favorites', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

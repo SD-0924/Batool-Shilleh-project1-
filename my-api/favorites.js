@@ -16,5 +16,11 @@
     "framework": "JSON",
     "image": "assets/json.png",
     "rating": 3.5
+  },
+  {
+    "id": "32",
+    "framework": "DevOps",
+    "image": "assets/devops.png",
+    "rating": 4
   }
 ]

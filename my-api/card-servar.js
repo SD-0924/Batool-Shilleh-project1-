@@ -29,7 +29,13 @@ app.get('/api/languages', (req, res) => {
 app.post('/api/favorites', (req, res) => {
     const favorite = req.body;
 
-    fs.readFile('favorites.js', 'utf8', (err, data) => {
+    // التحقق من صحة البيانات المدخلة
+    if (!favorite || !favorite.image || !favorite.framework || typeof favorite.rating !== 'number') {
+        return res.status(400).send('Invalid favorite data');
+    }
+
+    // قراءة الملف الموجود
+    fs.readFile('my-api/favorites.js', 'utf8', (err, data) => {
         if (err) {
             console.error(err);
             return res.status(500).send('Server Error');
@@ -37,21 +43,28 @@ app.post('/api/favorites', (req, res) => {
 
         let favorites = [];
         if (data) {
-            favorites = JSON.parse(data);
+            try {
+                favorites = JSON.parse(data); // تحويل النص إلى كائن JSON
+            } catch (error) {
+                console.error('Error parsing JSON:', error);
+                return res.status(500).send('Failed to parse favorites');
+            }
         }
 
-        favorites.push(favorite);
+        favorites.push(favorite); // إضافة المفضلة الجديدة إلى القائمة
 
-        fs.writeFile('favorites.js', JSON.stringify(favorites, null, 2), (err) => {
+        // كتابة المفضلات إلى الملف
+        fs.writeFile('my-api/favorites.js', JSON.stringify(favorites, null, 2), (err) => {
             if (err) {
                 console.error(err);
                 return res.status(500).send('Failed to save favorite');
             }
 
-            res.status(201).json(favorite);
+            res.status(201).json(favorite); // إعادة المفضلة المحفوظة
         });
     });
 });
+
 
 // Start the server
 app.listen(PORT, () => {
